@@ -1,0 +1,111 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{% static '/css/base.css' %}" type="text/css">
+    <title>E-Cart</title>
+  </head>
+  <body>
+    <head>
+    <div class=" bg-secondary pt-2 pl-3" style="height: 46px; text-align: justify; ">
+            <li class="active" style="list-style: none;">
+              <a class="text-white" href="/" style="font-size:large;"> Home <span class="sr-only">(current)</span></a>
+            </li>
+          </div>
+      </head>
+
+<section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 p-4 col-12" style="width: 40%;">
+            <div class="card">
+                <img src="{{ object.image }}" class="card-img-top" alt="" height="230px">
+                <div class="card-body">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text"></p>
+                  {% if user.is_authenticated %}
+                  <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary">Add to cart</a>
+                  {% else %}
+                  <a href="" class="btn btn-primary" onclick="myFunction()">Add to cart</a>
+                  {% endif %}
+                </div>
+              </div>
+        </div>
+        <div class="col-md-6 pt-3">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">{{ object.title}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Descrption</td>
+              <td>{{ object.description }}
+              </td>
+            </tr>
+            <tr>
+              <td>Stokes Left</td>
+              <td>{{ object.stock }}
+              </td>
+            </tr>
+            
+            {% if object.discount_price %}
+            <tr>
+              <td>Price</td>
+              <td>
+            <p style="font-size: large;"> <strong>{{ object.price }}</strong><span style="color: rgb(55, 81, 107); font-size: small; font-weight: bolder;">/{{ object.discount_price }} Off on discount</span></p>
+          </td></tr>
+             {% else %}
+              <tr>
+              <td>Price</td>
+              <td>{{ object.price }} </td>
+              </tr>
+              {% endif %}
+                      
+            
+          </tbody>
+        </table>
+      </div>
+    </div>  
+</div>
+</section>
+<footer id="footer" style="background: gray;">
+  <div class="container d-md-flex py-4">
+
+    <div class="mr-md-auto text-center text-md-left">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Company</span></strong>. All Rights Reserved
+      </div>
+    </div>
+    <div class="social-links text-center text-md-right pt-3 pt-md-0 " style="font-size: xx-large;" >
+      <a href="#" style="color: rgb(114, 182, 228);"><i class="fa fa-twitter"></i></a>
+      <a href="#" style="color: rgb(41, 85, 206);"><i class="fa fa-facebook"></i></a>
+      <a href="#" style="color: rgb(230, 55, 84);"><i class="fa fa-instagram"></i></a>
+      <a href="#" style="color: rgb(23, 153, 240);"><i class="fa fa-linkedin"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Optional JavaScript; choose one of the two! -->
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+<script>
+  function myFunction(params) {
+      alert("Please go back and login,or if you have no account then you have to create an account");
+  }
+  </script>
+  
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

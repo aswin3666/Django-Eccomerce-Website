@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="height: 40px; width: 100%; background: rgb(62, 63, 63); color: ghostwhite;text-align: center;">
+    <p>Hello, welcome to E-cart.... We Providing Best eccomerce solutions</p>
+  </div>
+  <h2 style="text-align:center; color: rgb(39, 36, 36);">Women's Trending</h2>
+  
+<div class="container-fluid">
+<div class="row">
+  {% for product in product %}
+  
+  <div class="col-md-3 p-4 col-6">
+      <div class="card">
+        <a href="{{ product.get_absolute_url }}"><img src="{{product.image}}" class="card-img-top" alt="" height="200px"></a>
+          <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <h5>( for {{ product.get_category_display }} )</h5>
+  
+              {% if product.discount_price %}
+              <p style="font-size: large;">{{ product.price }}<span style="color: rgb(55, 81, 107); font-size: small; font-weight: bolder;">/{{ product.discount_price }} Off</span></p>
+              {% else %}
+              {{ product.price }}
+              {% endif %}
+            
+            </p>
+          
+            {% if user.is_authenticated %}
+            <a href="{{ product.get_add_to_cart_url }}" class="btn btn-primary">Add to cart</a>
+            {% else %}
+            <a href=Login class="btn btn-primary">Add to cart</a>
+            {% endif %}
+          </div>   
+      </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+<div>
+{% if messages %}
+<h6>{{ messages }}</h6>
+{% endif %}
+</div>
+{% endblock %}

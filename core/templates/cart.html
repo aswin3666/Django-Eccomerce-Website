@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/cart.css' %}">
+
+<h1 id="shoppingcart">Shopping Cart</h1>
+<div class="container">
+<div class="row">
+<div class="pt-5 pl-2 col-12">
+    <table style="width:100%">
+        <tr>
+          <th>No:</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+        </tr>
+        {% for order_product in object.products.all %}
+        <tr>
+          <td>>{{ forloop.counter }}</td>
+          <td>{{ order_product.product.title }}</td>
+          {% if order_product.product.discount_price %}
+          <td>{{ order_product.product.price }}</td> 
+          {% else %}
+          <td>{{ order_product.product.price }}</td>
+          {% endif %}
+          <td>{{ order_product.quantity }}</td>
+          {% if order_product.product.discount_price %}
+          <td> {{ order_product.get_total_discount_product_price }}</td>
+          {% else %}
+          <td> {{ order_product.get_total_price }}</td>
+          {% endif %}
+          
+          
+          <td> <a href="{% url 'core:remove_from_cart' order_product.product.slug %}" class="btn btn-danger">Remove</a></td>
+      </tr>
+      {% if order_product.product.discount_price %}
+      <tr>
+        <td></td> <td></td>
+        <td><p style="color: rgb(55, 81, 107); font-size: small; font-weight: bolder;">({{ order_product.product.discount_price }} Off on <br> discount)</p></td></tr>
+        {% endif %}
+        {% endfor %}
+      </table>      
+</div>
+<div class="container pt-5">
+    <h4>Order Total :{{ object.get_total }}</h4>
+</div>
+<div class="container pt-5">
+    <div class="col-12">
+    <a href="#" class="btn btn-primary">CONTINUE SHOPPING</a>
+    <a href="checkout" class="btn btn-danger">PROCEED TO CHECKOUT</a>
+</div>
+</div>
+<div style="padding-top: 50px;">
+  {% for message in messages %}
+  <h4 style="text-align: center; color: brown;">{{message}}</h4>
+  {% endfor %}
+</div>
+</div>
+</div>
+<div style="width: 100; height: 50px; background: rgb(250, 252, 252);">
+</div>
+{% endblock %}

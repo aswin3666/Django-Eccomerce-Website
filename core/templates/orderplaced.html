@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% block content %}
+<h3 style="text-align: center;">Your Orders</h3>
+{% if user.is_authenticated %}
+{% for order_product in object.products.all %}
+{% for order_details in order_details %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Order details</th>
+        <th scope="col">Shipping Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <img src="{{ order_product.product.image }}" alt="" height="110px" width="120px">
+            <p>Ordered  {{ order_product.product.title }} will deliver in 6-7 days </p></td>
+        <td> {{ order_details.shipping_address }},
+            {{ order_details.zip }},
+            {{ order_details.country }}<br>
+            Contact Number : {{ order_details.mobilenumber }} <br>
+            Total Price : {{ object.get_total }} <br>
+            {% if object.order_booked_date %}
+            {{ object.order_booked_date }}
+            {% endif %} <br>
+            {% if object.order_placed %}
+            <h3>ORDER PLACED</h3>
+            {% endif %} 
+            
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% endblock %}

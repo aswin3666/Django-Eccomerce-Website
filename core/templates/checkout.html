@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+<form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" onclick="myFunction()" value="Place Order" style="background: rgb(94, 210, 245); border: rgb(127, 240, 248); border-radius: 5%; width: 170px; height: 33px; ">
+</form>
+</div>
+<div style="width: 100; height: 50px; background: rgb(249, 250, 250);">
+</div>
+<script>
+    function myFunction(params) {
+        alert("Are you sure to place your order");
+    }
+    </script>
+    
+{% endblock %}
